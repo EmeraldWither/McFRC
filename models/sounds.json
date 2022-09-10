@@ -1,0 +1,27 @@
+{
+  "gamestate.start": {
+    "sounds": [
+      "gamestate/start"
+    ]
+  },
+  "gamestate.teleop": {
+    "sounds": [
+      "gamestate/teleop"
+    ]
+  },
+  "gamestate.warning": {
+    "sounds": [
+      "gamestate/warning"
+    ]
+  },
+  "gamestate.end": {
+    "sounds": [
+      "gamestate/end"
+    ]
+  },
+    "gamestate.abort": {
+    "sounds": [
+      "gamestate/abort"
+    ]
+  }
+}

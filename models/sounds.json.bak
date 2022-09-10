@@ -1,0 +1,32 @@
+{
+  "gamestate.start": {
+    "sounds": [
+      "whatever/path/example_1"
+    ]
+  },
+  "gamestate.teleop": {
+    "sounds": [
+      "whatever/path/example_2"
+    ]
+  },
+  "gamestate.warning": {
+    "sounds": [
+      "whatever/path/example_2"
+    ]
+  },
+  "gamestate.end": {
+    "sounds": [
+      "whatever/path/example_2"
+    ]
+  },
+  "gamestate.buzzer": {
+    "sounds": [
+      "whatever/path/example_2"
+    ]
+  },
+    "gamestate.abort": {
+    "sounds": [
+      "whatever/path/example_2"
+    ]
+  }
+}
