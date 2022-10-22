@@ -14,8 +14,6 @@ public interface Cargo {
     AllianceColor getColor();
 
     ArmorStand getArmorStand();
-    ArmorStand getGroundStand();
-
     boolean isOnGround();
     boolean isMoving();
 

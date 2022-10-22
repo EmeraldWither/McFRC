@@ -1,6 +1,7 @@
 package org.emeraldcraft.mcfrc.rapidreact.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,6 +23,9 @@ public class RRRobot extends Robot {
     @Getter
     private int cargoAmount = 0;
     private final ArrayList<Cargo> cargo = new ArrayList<>(2);
+    @Getter
+    @Setter
+    private int shooterSpeed = 0;
 
     public RRRobot(AllianceColor team, Player player) {
         super(team, player);
@@ -32,7 +36,7 @@ public class RRRobot extends Robot {
         this.cargoAmount++;
         this.cargo.add(cargo);
         Inventory inv = player.getInventory();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 35; i++) {
             if (inv.getItem(i) == null || Objects.requireNonNull(inv.getItem(i)).getType() == Material.CARROT_ON_A_STICK) {
                 inv.setItem(i, cargo.getBall());
                 break;
@@ -50,10 +54,10 @@ public class RRRobot extends Robot {
     public void useCargo(Cargo cargo) {
         if (cargo == null) return;
         cargo.spawnCargo(player.getLocation().add(0, 1.5, 0));
-        ((RRCargo) cargo).launchCargo(player, false);
+        ((RRCargo) cargo).launchCargo(this, false);
         this.cargo.remove(cargo);
         cargoAmount--;
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < 35; i++) {
             ItemStack item = player.getInventory().getItem(i);
             if (item == null) continue;
             if (item.getType() == Material.PLAYER_HEAD) {

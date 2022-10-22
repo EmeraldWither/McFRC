@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -26,12 +25,6 @@ public class RRCargo implements Cargo{
     private final AllianceColor color;
     @Getter
     private ArmorStand armorStand;
-    /**
-     * The armorstand which is carrying the armorstand entity which represents the cargo, which allows the cargo armor stand to be moved
-     * May be null
-     */
-    @Getter
-    private ArmorStand groundStand;
     @Getter
     private final ItemStack ball;
 
@@ -69,32 +62,17 @@ public class RRCargo implements Cargo{
                 uuid.toString()
         );
 
-        //Ground entity stand
-        groundStand = loc.getWorld().spawn(armorStand.getLocation().subtract(0, 3.3, 0), ArmorStand.class);
-        groundStand.addPassenger(armorStand);
-        groundStand.setGravity(false);
-        groundStand.setInvisible(true);
-        groundStand.getPersistentDataContainer().set(
-                FRCGame.getRapidReact().getKey(),
-                PersistentDataType.STRING,
-                uuid.toString()
-        );
-
-        armorStand.getBoundingBox().expand(10);
-
         Bukkit.getScheduler().runTaskAsynchronously(JavaPlugin.getProvidingPlugin(MCFRCPlugin.class), () -> {
             if(color == AllianceColor.BLUE) RapidUtils.changeSkin(ball, AllianceColor.BLUE_CARGO_HEAD);
             else RapidUtils.changeSkin(ball, AllianceColor.RED_CARGO_HEAD);
             armorStand.getEquipment().setHelmet(ball);
         });
     }
-    public void launchCargo(Player player, boolean randomize){
+    public void launchCargo(RRRobot robot, boolean randomize){
         if(armorStand == null || !armorStand.isValid()) throw new IllegalStateException("Cargo is not spawned");
-        groundStand.removePassenger(armorStand);
-        groundStand.remove();
-        groundStand = null;
 
-        Vector vel = player.getEyeLocation().getDirection();
+        Vector vel = armorStand.getEyeLocation().getDirection();
+        vel.setY(0);
         if(randomize) {
             Random gen = new Random();
             vel.setX(vel.getX() + gen.nextDouble() * 0.5 - 0.15);
@@ -102,30 +80,25 @@ public class RRCargo implements Cargo{
             vel.setZ(vel.getZ() + gen.nextDouble() * 0.5 - 0.15);
         }
         else{
-            vel.add(new Vector(0, 1.3, 0));
+            vel.add(new Vector(0, (robot.getShooterSpeed() / 20.0) + 0.5 , 0));
         }
-        vel.multiply(1.5);
         armorStand.setVelocity(vel);
         isOnGround = false;
     }
     public void land(Location loc){
         if(armorStand != null && armorStand.isValid()){
-            armorStand.teleport(loc.subtract(0, 1.45, 0));
+            loc = loc.subtract(0, 1.45, 0);
+            if(loc.getBlock().getType().toString().contains("quartz")){
+                return; // Don't land on quartz
+            }
+            armorStand.teleport(loc);
             isOnGround = true;
-
-            groundStand = loc.getWorld().spawn(armorStand.getLocation(), ArmorStand.class);
-            groundStand.addPassenger(armorStand);
         }
     }
 
     public void despawnCargo() {
         armorStand.remove();
         armorStand = null;
-        if(groundStand != null && groundStand.isValid()){
-            groundStand.remove();
-            groundStand = null;
-        }
-
     }
 
 }

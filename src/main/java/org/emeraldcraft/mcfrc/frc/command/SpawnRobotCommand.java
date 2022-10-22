@@ -1,5 +1,6 @@
 package org.emeraldcraft.mcfrc.frc.command;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +19,7 @@ public class SpawnRobotCommand implements CommandExecutor {
             stand.getEquipment().setHelmet(new ItemStack(Material.BLUE_STAINED_GLASS));
             stand.addPassenger(player);
             player.setInvisible(false);
+            player.setGameMode(GameMode.ADVENTURE);
         }
 
         return false;

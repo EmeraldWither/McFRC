@@ -41,7 +41,7 @@ public class RRFMS {
         rapidReact.getRobots().forEach(robot -> {
             robot.getPlayer().getInventory().clear();
             for (int i = 0; i < robot.getPlayer().getInventory().getSize(); i++) {
-                if(i == 45) continue;
+                if(i == 37) continue;
                 ItemStack itemStack = new ItemStack(Material.CARROT_ON_A_STICK);
                 ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.displayName(Component.text(""));
@@ -89,6 +89,7 @@ public class RRFMS {
             setGameState(GameState.NONE);
             for(Robot robot: rapidReact.getRobots()){
                 robot.setDisabled(false);
+                robot.getPlayer().getInventory().clear();
             }
             Bukkit.getLogger().log(INFO, "Fully ended");
             System.gc();

@@ -33,8 +33,9 @@ public class RobotController extends PacketAdapter {
             return;
         }
 
-
-        float side = pc.getFloat().read(0);
+        //Tank Drive
+        float side = 0.0F;
+        //side = pc.getFloat().read(0);
         float forw = pc.getFloat().read(1);
         Vector vel = getVelocityVector(vehicle.getVelocity(), player, side, forw);
         vehicle.setVelocity(vel);

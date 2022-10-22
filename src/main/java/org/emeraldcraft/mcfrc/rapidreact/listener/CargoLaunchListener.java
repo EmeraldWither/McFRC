@@ -11,10 +11,22 @@ public class CargoLaunchListener implements Listener {
     public void onCargoChargeUp(PlayerInteractEvent event){
         //Check to see if the player is holding down right click
         if(event.getAction().isRightClick()){
+            if(!event.hasItem()) return;
+            if(event.hasBlock()) return;
             RRRobot robot = FRCGame.getRapidReact().getRobot(event.getPlayer());
-            if(robot == null) return;
+            if (robot == null) return;
+            int speed = robot.getShooterSpeed() < 10 ? robot.getShooterSpeed() + 1 : 10;
+            robot.setShooterSpeed(speed);
+            robot.getPlayer().setLevel(speed);
+        }
+        if(event.getAction().isLeftClick()){
+            RRRobot robot = FRCGame.getRapidReact().getRobot(event.getPlayer());
+            if (robot == null) return;
             robot.useCargo();
-            event.getPlayer().sendMessage("Cargo launched!");
+            robot.setShooterSpeed(0);
+
+            robot.getPlayer().setExp(0);
+            robot.getPlayer().setLevel(0);
         }
     }
 }
