@@ -28,6 +28,7 @@ public class RRRobot extends Robot {
     }
 
     public void addCargo(Cargo cargo) {
+        cargo.despawnCargo();
         this.cargoAmount++;
         this.cargo.add(cargo);
         Inventory inv = player.getInventory();
@@ -49,7 +50,7 @@ public class RRRobot extends Robot {
     public void useCargo(Cargo cargo) {
         if (cargo == null) return;
         cargo.spawnCargo(player.getLocation().add(0, 1.5, 0));
-        cargo.launchCargo(player, true);
+        ((RRCargo) cargo).launchCargo(player, false);
         this.cargo.remove(cargo);
         cargoAmount--;
         for (int i = 0; i < 36; i++) {
