@@ -16,25 +16,26 @@ public class FRCCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("register")) {
                     if (args.length > 1) {
                         if (args[1].equalsIgnoreCase("red")) {
-                            FRCGame.getInstance().createRobot(AllianceColor.RED, player);
+                            FRCGame.getRapidReact().createRobot(AllianceColor.RED, player);
                         }
                         if (args[1].equalsIgnoreCase("blue")) {
-                            FRCGame.getInstance().createRobot(AllianceColor.BLUE, player);
+                            FRCGame.getRapidReact().createRobot(AllianceColor.BLUE, player);
                         }
                     }
                 }
+
                 if (args[0].equalsIgnoreCase("spawncargo")) {
-                    FRCGame.getInstance().createCargo(AllianceColor.BLUE).spawnCargo(player.getLocation());
+                    FRCGame.getRapidReact().createCargo(AllianceColor.BLUE).spawnCargo(player.getLocation());
                 }
                 if(args[0].equalsIgnoreCase("gamestate")){
                     if(args.length > 1){
                         GameState gameState = GameState.valueOf(args[1].toUpperCase());
-                        FRCGame.getInstance().getFms().setGameState(gameState);
+                        FRCGame.getRapidReact().getFms().setGameState(gameState);
                         sender.sendMessage("Game state set to " + gameState.name());
                     }
                 }
                 if(args[0].equalsIgnoreCase("start")){
-                    FRCGame.getInstance().getFms().start();
+                    FRCGame.getRapidReact().getFms().start();
                 }
             }
         }

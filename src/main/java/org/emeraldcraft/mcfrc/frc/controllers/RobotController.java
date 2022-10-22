@@ -24,7 +24,7 @@ public class RobotController extends PacketAdapter {
         Entity vehicle = player.getVehicle();
         assert vehicle != null;
 
-        Robot robot = FRCGame.getInstance().getRobot(player);
+        Robot robot = FRCGame.getRapidReact().getRobot(player);
         if(robot == null){
             return;
         }
@@ -40,6 +40,7 @@ public class RobotController extends PacketAdapter {
         vehicle.setVelocity(vel);
         vehicle.setRotation(player.getEyeLocation().getYaw(), 0);
     }
+    //Def not mine
     private Vector getVelocityVector(Vector vector, Player player, float side, float forw) {
         vector.setX(0.0);
         vector.setZ(0.0);

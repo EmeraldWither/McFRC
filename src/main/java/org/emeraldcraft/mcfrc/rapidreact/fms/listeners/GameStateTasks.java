@@ -10,38 +10,38 @@ import org.emeraldcraft.mcfrc.frc.entities.Robot;
 public class GameStateTasks extends BukkitRunnable {
     @Override
     public void run() {
-        for(Robot robot : FRCGame.getInstance().getRobots()){
-            long time = FRCGame.getInstance().getFms().getTime();
-            Component actionBar = Component.text(
+        for(Robot robot : FRCGame.getRapidReact().getRobots()){
+            long time = FRCGame.getRapidReact().getFms().getTime();
+            Component actionBar;
+            actionBar = Component.text(
                     "RED: %s | %s | BLUE: %s"
                             .formatted(
-                                    FRCGame.getInstance().getFms().getScore().getRedAllianceScore(),
-                                    time,
-                                    FRCGame.getInstance().getFms().getScore().getBlueAllianceScore()
+                                    FRCGame.getRapidReact().getFms().getScore().getRedAllianceScore(),
+                                    robot.isDisabled() ? "DISABLED" : time,
+                                    FRCGame.getRapidReact().getFms().getScore().getBlueAllianceScore()
                             )
             );
+
             robot.getPlayer().sendActionBar(actionBar);
         }
-        switch(FRCGame.getInstance().getFms().getGameState()){
+        switch(FRCGame.getRapidReact().getFms().getGameState()){
             case START:
                 //Robots are in AUTO mode
-                for(Robot robot : FRCGame.getInstance().getRobots()){
+                for(Robot robot : FRCGame.getRapidReact().getRobots()){
                     Player player = robot.getPlayer();
-                    player.setWalkSpeed(0.5F);
                     player.addPotionEffect(PotionEffectType.BLINDNESS.createEffect(Integer.MAX_VALUE, 1));
                 }
                 break;
             case TELEOP:
                 //Robots are in TELEOP mode
-                for(Robot robot : FRCGame.getInstance().getRobots()){
+                for(Robot robot : FRCGame.getRapidReact().getRobots()){
                     Player player = robot.getPlayer();
-                    player.setWalkSpeed(1F);
                     player.removePotionEffect(PotionEffectType.BLINDNESS);
                 }
                 break;
             case END:
-                //Robots are in END mode
-                for(Robot robot : FRCGame.getInstance().getRobots()){
+            case ABORT:
+                for(Robot robot : FRCGame.getRapidReact().getRobots()){
                     robot.setDisabled(true);
                 }
                 break;

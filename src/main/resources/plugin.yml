@@ -1,4 +1,4 @@
-main: "org.emeraldcraft.mcfrc.MCFRCPlugin"
+main: "org.emeraldcraft.mcfrc.frc.MCFRCPlugin"
 name: "MCFRCPlugin"
 version: "1.0.0"
 api-version: 1.18

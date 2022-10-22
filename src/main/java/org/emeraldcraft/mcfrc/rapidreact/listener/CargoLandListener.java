@@ -14,10 +14,10 @@ public class CargoLandListener implements Listener {
         if(event.getEntity() instanceof ArmorStand stand){
             if(RapidUtils.isCargo(stand) == null) return;
             Cargo cargo = RapidUtils.isCargo(stand);
-            if(stand.isOnGround()){
+            assert cargo != null;
+            if(stand.isOnGround() && !cargo.isMoving()){
                 stand.setGravity(false);
                 stand.setHeadPose(new EulerAngle(0, 0, 0));
-                assert cargo != null;
                 cargo.land(stand.getLocation());
                 return;
             }

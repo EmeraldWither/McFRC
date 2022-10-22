@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.emeraldcraft.mcfrc.frc.FRCGame;
 import org.emeraldcraft.mcfrc.rapidreact.entities.Cargo;
-import org.emeraldcraft.mcfrc.rapidreact.entities.hub.Hub;
+import org.emeraldcraft.mcfrc.rapidreact.entities.Hub;
 import org.emeraldcraft.mcfrc.rapidreact.fms.GameState;
 import org.emeraldcraft.mcfrc.rapidreact.fms.utils.FMSUtils;
 import org.emeraldcraft.mcfrc.rapidreact.utils.RapidUtils;
@@ -14,7 +14,7 @@ import org.emeraldcraft.mcfrc.rapidreact.utils.RapidUtils;
 public class CargoScoreListener implements Listener {
     @EventHandler
     public void onEntityMove(EntityMoveEvent event){
-        if(FRCGame.getInstance().getFms().getGameState() == GameState.NONE) return;
+        if(FRCGame.getRapidReact().getFms().getGameState() == GameState.NONE) return;
         if(event.getEntity() instanceof ArmorStand armorStand){
             Cargo cargo = RapidUtils.isCargo(armorStand);
             if(cargo == null) return;

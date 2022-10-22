@@ -27,7 +27,12 @@ public abstract class Robot {
     protected final Player player;
     @Getter
     @Setter
-    private boolean disabled;
+    private boolean disabled = false;
+    /**
+     * Ranking point.
+     */
+    @Getter @Setter
+    private int rankingPoints = 0;
 
     @Getter
     private GameState gameState = GameState.NONE;
@@ -37,9 +42,15 @@ public abstract class Robot {
         this.player = player;
     }
 
+    /**
+     * Updates the game state of the robot.
+     * You probably shouldn't be calling this on your own.
+     * <p>
+     * It will play any sounds if the game state was updated
+     */
     public void updateGameState() {
         GameState prev = gameState;
-        gameState = FRCGame.getInstance().getFms().getGameState();
+        gameState = FRCGame.getRapidReact().getFms().getGameState();
 
         if (prev != gameState) {
             @Subst("") String name = gameState.name().toLowerCase();
@@ -50,6 +61,9 @@ public abstract class Robot {
 
     }
 
+    /**
+     * @return A formatted name with the color of the alliance of the player
+     */
     public Component getFormattedName() {
         return Component.text(player.getName()).
                 //If color is blue, then set the color to blue

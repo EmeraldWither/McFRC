@@ -1,4 +1,4 @@
-package org.emeraldcraft.mcfrc.rapidreact.entities.hub;
+package org.emeraldcraft.mcfrc.rapidreact.entities;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -24,8 +24,8 @@ public class Hub {
         this.level = level;
         hubEntity = (ArmorStand) Bukkit.getWorld("rapidreact").spawnEntity(
                 level == HubLevel.LOWER ?
-                        new Location(Bukkit.getWorld("rapidreact"), 0, 0, 0) :
-                        new Location(Bukkit.getWorld("rapidreact"), 0, 10, 0)
+                        new Location(Bukkit.getWorld("rapidreact"), 13.406, 0.5, -16.118) :
+                        new Location(Bukkit.getWorld("rapidreact"), 13.016, 5.3, 16.483)
                 , EntityType.ARMOR_STAND);
         if(level == HubLevel.LOWER){
             //Apply the lowe hub texture to the armor stand
@@ -33,7 +33,7 @@ public class Hub {
         }
         else{
             //TODO Make upper hub texture
-            hubEntity.setItem(EquipmentSlot.HEAD, new ItemStack(Material.HOPPER));
+            hubEntity.setItem(EquipmentSlot.HEAD, new ItemStack(Material.GRAY_STAINED_GLASS));
         }
     }
     public void remove(){

@@ -16,7 +16,7 @@ public class MCFRCPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("ProtocolLib") == null){
-            getLogger().severe("ProtocolLib is not installed! Disabling plugin...");
+            getLogger().severe("[MC FRC] ProtocolLib is not installed! Disabling plugin...");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -29,6 +29,6 @@ public class MCFRCPlugin extends JavaPlugin {
         RapidReact game = new RapidReact(this);
         ProtocolManager pm = ProtocolLibrary.getProtocolManager();
         pm.addPacketListener(new RobotController(this));
-        FRCGame.setInstance(game);
+        FRCGame.setRapidReact(game);
     }
 }

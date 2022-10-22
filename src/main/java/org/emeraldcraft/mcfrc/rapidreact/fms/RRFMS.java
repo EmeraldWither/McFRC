@@ -10,13 +10,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.emeraldcraft.mcfrc.frc.entities.Robot;
 import org.emeraldcraft.mcfrc.rapidreact.RapidReact;
-import org.emeraldcraft.mcfrc.rapidreact.entities.hub.Hub;
+import org.emeraldcraft.mcfrc.rapidreact.entities.Hub;
 import org.emeraldcraft.mcfrc.rapidreact.fms.listeners.CargoScoreListener;
 import org.emeraldcraft.mcfrc.rapidreact.fms.listeners.GameStateTasks;
 
 import static java.util.logging.Level.INFO;
 
-public class FMS {
+public class RRFMS {
     private final JavaPlugin plugin;
     @Getter
     private GameState gameState = GameState.NONE;
@@ -32,7 +32,7 @@ public class FMS {
     private boolean isRunning = false;
     @Getter
     private int time = 150;
-    public FMS(JavaPlugin plugin, RapidReact rapidReact) {
+    public RRFMS(JavaPlugin plugin, RapidReact rapidReact) {
         this.plugin = plugin;
         this.rapidReact = rapidReact;
         Bukkit.getPluginManager().registerEvents(new CargoScoreListener(), plugin);
@@ -100,6 +100,4 @@ public class FMS {
                 Robot::updateGameState
         );
     }
-
-
 }

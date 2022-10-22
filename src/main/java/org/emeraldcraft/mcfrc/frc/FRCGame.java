@@ -5,11 +5,11 @@ import org.emeraldcraft.mcfrc.rapidreact.RapidReact;
 
 public class FRCGame {
     @Getter
-    private static RapidReact instance;
+    private static RapidReact rapidReact;
 
-    public static void setInstance(RapidReact instance) {
-        if(FRCGame.instance == null){
-            FRCGame.instance = instance;
+    public static void setRapidReact(RapidReact rapidReact) {
+        if(FRCGame.rapidReact == null){
+            FRCGame.rapidReact = rapidReact;
         }
     }
 

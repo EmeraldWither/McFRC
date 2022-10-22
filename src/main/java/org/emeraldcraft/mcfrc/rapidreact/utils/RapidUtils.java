@@ -26,9 +26,9 @@ public class RapidUtils {
         item.setItemMeta(skull);
     }
     public static Cargo isCargo(ArmorStand stand){
-        if(stand.getPersistentDataContainer().has(FRCGame.getInstance().getKey(), PersistentDataType.STRING)){
-            String uuid = stand.getPersistentDataContainer().get(FRCGame.getInstance().getKey(), PersistentDataType.STRING);
-            for(Cargo cargo : FRCGame.getInstance().getCargos()){
+        if(stand.getPersistentDataContainer().has(FRCGame.getRapidReact().getKey(), PersistentDataType.STRING)){
+            String uuid = stand.getPersistentDataContainer().get(FRCGame.getRapidReact().getKey(), PersistentDataType.STRING);
+            for(Cargo cargo : FRCGame.getRapidReact().getCargos()){
                 assert uuid != null;
                 if(UUID.fromString(uuid).equals(cargo.getUuid())){
                     return cargo;

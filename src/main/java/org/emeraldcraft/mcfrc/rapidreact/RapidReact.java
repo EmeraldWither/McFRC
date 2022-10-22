@@ -5,9 +5,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.emeraldcraft.mcfrc.frc.MCFRCPlugin;
 import org.emeraldcraft.mcfrc.rapidreact.entities.Cargo;
+import org.emeraldcraft.mcfrc.rapidreact.entities.RRCargo;
 import org.emeraldcraft.mcfrc.rapidreact.entities.RRRobot;
 import org.emeraldcraft.mcfrc.rapidreact.fms.AllianceColor;
-import org.emeraldcraft.mcfrc.rapidreact.fms.FMS;
+import org.emeraldcraft.mcfrc.rapidreact.fms.RRFMS;
 
 import java.util.ArrayList;
 
@@ -20,12 +21,12 @@ public class RapidReact {
     private final NamespacedKey key;
 
     @Getter
-    private final FMS fms;
+    private final RRFMS fms;
 
 
     public RapidReact(MCFRCPlugin plugin) {
         this.key = new NamespacedKey(plugin, "rapidreact");
-        fms = new FMS(plugin, this);
+        fms = new RRFMS(plugin, this);
     }
 
     public RRRobot getRobot(Player player){
@@ -35,7 +36,7 @@ public class RapidReact {
                 .orElse(null);
     }
     public Cargo createCargo(AllianceColor color){
-        Cargo cargo = new Cargo(color);
+        Cargo cargo = new RRCargo(color);
         cargos.add(cargo);
         return cargo;
     }
