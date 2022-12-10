@@ -4,7 +4,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.emeraldcraft.mcfrc.frc.FRCGame;
-import org.emeraldcraft.mcfrc.rapidreact.fms.AllianceColor;
+import org.emeraldcraft.mcfrc.rapidreact.fms.Alliance;
 import org.emeraldcraft.mcfrc.rapidreact.fms.GameState;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,17 +16,17 @@ public class FRCCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("register")) {
                     if (args.length > 1) {
                         if (args[1].equalsIgnoreCase("red")) {
-                            FRCGame.getRapidReact().createRobot(AllianceColor.RED, player);
+                            FRCGame.getRapidReact().createRobot(Alliance.RED, player);
                         }
                         if (args[1].equalsIgnoreCase("blue")) {
-                            FRCGame.getRapidReact().createRobot(AllianceColor.BLUE, player);
+                            FRCGame.getRapidReact().createRobot(Alliance.BLUE, player);
                         }
                     }
                 }
 
-                if (args[0].equalsIgnoreCase("spawncargo")) {
-                    FRCGame.getRapidReact().createCargo(AllianceColor.BLUE).spawnCargo(player.getLocation());
-                }
+//                if (args[0].equalsIgnoreCase("spawncargo")) {
+//                    FRCGame.getRapidReact().createCargo(Alliance.BLUE).spawnCargo(player.getLocation());
+//                }
                 if(args[0].equalsIgnoreCase("gamestate")){
                     if(args.length > 1){
                         GameState gameState = GameState.valueOf(args[1].toUpperCase());

@@ -24,27 +24,27 @@ public class GameStateTasks extends BukkitRunnable {
 
             robot.getPlayer().sendActionBar(actionBar);
         }
-        switch(FRCGame.getRapidReact().getFms().getGameState()){
-            case START:
+        switch (FRCGame.getRapidReact().getFms().getGameState()) {
+            case START -> {
                 //Robots are in AUTO mode
-                for(Robot robot : FRCGame.getRapidReact().getRobots()){
+                for (Robot robot : FRCGame.getRapidReact().getRobots()) {
                     Player player = robot.getPlayer();
                     player.addPotionEffect(PotionEffectType.BLINDNESS.createEffect(Integer.MAX_VALUE, 1));
                 }
-                break;
-            case TELEOP:
+            }
+            case TELEOP -> {
                 //Robots are in TELEOP mode
-                for(Robot robot : FRCGame.getRapidReact().getRobots()){
+                for (Robot robot : FRCGame.getRapidReact().getRobots()) {
                     Player player = robot.getPlayer();
                     player.removePotionEffect(PotionEffectType.BLINDNESS);
                 }
-                break;
-            case END:
-            case ABORT:
-                for(Robot robot : FRCGame.getRapidReact().getRobots()){
+            }
+            case END, ABORT -> {
+                //Robots are in ENDGAME mode
+                for (Robot robot : FRCGame.getRapidReact().getRobots()) {
                     robot.setDisabled(true);
                 }
-                break;
+            }
         }
     }
 

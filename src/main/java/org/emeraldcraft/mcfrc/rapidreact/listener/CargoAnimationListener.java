@@ -8,7 +8,7 @@ import org.bukkit.util.EulerAngle;
 import org.emeraldcraft.mcfrc.rapidreact.entities.Cargo;
 import org.emeraldcraft.mcfrc.rapidreact.utils.RapidUtils;
 
-public class CargoLandListener implements Listener {
+public class CargoAnimationListener implements Listener {
     @EventHandler
     public void onEntityMove(EntityMoveEvent event){
         if(event.getEntity() instanceof ArmorStand stand){

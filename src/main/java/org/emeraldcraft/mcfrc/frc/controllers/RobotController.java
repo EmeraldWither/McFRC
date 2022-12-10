@@ -22,12 +22,12 @@ public class RobotController extends PacketAdapter {
         PacketContainer pc = event.getPacket();
         Player player = event.getPlayer();
         Entity vehicle = player.getVehicle();
-        assert vehicle != null;
 
         Robot robot = FRCGame.getRapidReact().getRobot(player);
         if(robot == null){
             return;
         }
+        if(vehicle == null) return;
         if(robot.isDisabled()) {
             vehicle.setVelocity(new Vector(0,0,0));
             return;

@@ -22,11 +22,15 @@ public class Hub {
 
     public Hub(HubLevel level) {
         this.level = level;
-        hubEntity = (ArmorStand) Bukkit.getWorld("rapidreact").spawnEntity(
+        hubEntity = (ArmorStand) Bukkit.getWorld("RapidReact").spawnEntity(
                 level == HubLevel.LOWER ?
-                        new Location(Bukkit.getWorld("rapidreact"), 13.406, 0.5, -16.118) :
-                        new Location(Bukkit.getWorld("rapidreact"), 13.016, 5.3, 16.483)
+                        new Location(Bukkit.getWorld("RapidReact"), 13.406, 0.5, -16.118) :
+                        new Location(Bukkit.getWorld("RapidReact"), 13.016, 6.3, -16.483)
                 , EntityType.ARMOR_STAND);
+        hubEntity.setGravity(false);
+        hubEntity.setInvulnerable(true);
+        hubEntity.setVisible(false);
+        hubEntity.setCollidable(false);
         if(level == HubLevel.LOWER){
             //Apply the lowe hub texture to the armor stand
             hubEntity.setItem(EquipmentSlot.HEAD, new ItemStack(Material.GLASS));

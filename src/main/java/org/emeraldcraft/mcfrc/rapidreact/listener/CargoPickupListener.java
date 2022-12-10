@@ -21,6 +21,12 @@ public class CargoPickupListener implements Listener {
             if (armorStand.getPassengers().isEmpty()) return;
             Entity entity = armorStand.getPassengers().get(0);
             if (entity instanceof Player player) {
+                //Make sure that it is actually a robot
+                if (FRCGame.getRapidReact().getRobot(player) == null) return;
+
+                //Check to see if it is holding 2 or more pieces of cargo
+                if (FRCGame.getRapidReact().getRobot(player).getCargoAmount() >= 2) return;
+
                 //Check to see if there are any entities near the armorstand
                 Collection<Entity> entities = armorStand.getLocation().getNearbyEntities(2, 0, 2);
                 int amount = entities.size();
@@ -32,7 +38,7 @@ public class CargoPickupListener implements Listener {
                  */
                 //Start by ray tracing from the robot and see what entities collide with it
                 armorStand.getLocation().getWorld().spawnParticle(Particle.SMOKE_LARGE, armorStand.getLocation(), 30);
-                RayTraceResult rayTraceResult = armorStand.getWorld().rayTraceEntities(armorStand.getLocation().subtract(0, -0.5, 0), player.getLocation().getDirection(), 0.5, 0.5, entity1 -> entity1 instanceof ArmorStand);
+                RayTraceResult rayTraceResult = armorStand.getWorld().rayTraceEntities(armorStand.getLocation().subtract(0, -0.5, 0), player.getLocation().getDirection(), 0.65, 0.65, entity1 -> entity1 instanceof ArmorStand);
 
                 if(rayTraceResult == null) return;
                 Entity entityCargo = rayTraceResult.getHitEntity();
