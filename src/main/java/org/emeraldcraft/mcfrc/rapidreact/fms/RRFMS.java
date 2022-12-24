@@ -86,7 +86,7 @@ public class RRFMS implements FMS {
         }
         //Spawn in robots
         for (Robot robot : rapidReact.getRobots()) {
-            robot.spawnRobot();
+            robot.spawnRobot(null);
             robot.setDisabled(false);
         }
 

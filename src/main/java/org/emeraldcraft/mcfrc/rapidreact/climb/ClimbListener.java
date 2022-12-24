@@ -48,9 +48,10 @@ public class ClimbListener extends PacketAdapter{
 
 
         if(robot.getClimbState().isClimbing()) return;
+        if(robot.getClimbState().getClimbLevel() == 3) return;
 
         //Start their climb process
-        if(climbZone != null && jumping && robot.getClimb().getStatus().equals(Climb.ClimbStatus.NONE)) {
+        if(climbZone != null && jumping) {
             player.sendMessage("Prepare to climb! You will be climbing on level " + robot.getClimb().getClimbLevel());
             robot.getClimb().startClimb();
         }
